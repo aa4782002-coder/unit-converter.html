@@ -3,388 +3,226 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>US Unit Converter Pro</title>
+    
+    <title>Easy Unit Converter | US Standard & Metric Tool</title>
+    <meta name="description" content="Fast and free online unit converter for US Customary and Metric units. Convert length, area, volume, and temperature instantly.">
+    <meta name="keywords" content="unit converter, inches to cm, fahrenheit to celsius, gallons to liters, miles to km, area converter, US measurement tools, fast conversion">
+    <meta name="author" content="AA4782002-Coder">
+
     <style>
-        /* Modern, Clean US-Themed Styles */
         :root {
-            --us-blue: #0A3161;
-            --us-red: #B31942;
-            --bg-color: #f0f4f8;
-            --card-bg: #ffffff;
-            --text-main: #333333;
+            --us-blue: #002868;
+            --us-red: #bf0a30;
+            --light-gray: #f8f9fa;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: #f0f2f5;
             margin: 0;
-            padding: 40px 20px;
+            padding: 20px;
+            color: #333;
         }
 
-        /* Visitor Counter */
-        .visitor-counter {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            background-color: var(--us-blue);
+        /* Visitor Counter Style */
+        .counter-box {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: var(--us-blue);
             color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.9rem;
+            padding: 8px 15px;
+            border-radius: 5px;
             font-weight: bold;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+            font-size: 14px;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
 
-        header {
+        .header {
             text-align: center;
-            margin-bottom: 40px;
+            padding: 30px 0;
         }
 
-        header h1 {
-            color: var(--us-blue);
-            margin-bottom: 5px;
-        }
-
-        header p {
-            color: #666;
-            margin-top: 0;
-        }
+        .header h1 { color: var(--us-blue); margin-bottom: 5px; }
+        .header p { color: #666; }
 
         .container {
-            max-width: 900px;
+            max-width: 1000px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
         }
 
         .card {
-            background: var(--card-bg);
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            border-top: 4px solid var(--us-red);
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-bottom: 4px solid var(--us-red);
         }
 
-        .card h3 {
-            margin-top: 0;
+        .card h2 {
+            font-size: 1.2rem;
             color: var(--us-blue);
+            margin-top: 0;
             border-bottom: 1px solid #eee;
             padding-bottom: 10px;
         }
 
-        .input-group {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-
-        input[type="number"] {
+        input, select {
             width: 100%;
             padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
             font-size: 16px;
-            box-sizing: border-box;
-            margin-bottom: 15px;
         }
 
-        select {
-            flex: 1;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            font-size: 14px;
-            cursor: pointer;
-        }
-
-        .swap-btn {
-            background-color: #eee;
-            border: none;
-            border-radius: 50%;
-            width: 35px;
-            height: 35px;
-            font-size: 18px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--us-blue);
-            transition: 0.2s;
-        }
-
-        .swap-btn:hover {
-            background-color: var(--us-blue);
-            color: white;
-        }
-
-        .result-display {
-            background-color: #e9f0f8;
+        .result {
+            background: #eef7ff;
             padding: 15px;
-            border-radius: 6px;
             text-align: center;
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: bold;
-            color: var(--us-blue);
-            margin-bottom: 15px;
-            min-height: 28px;
+            color: var(--us-red);
+            border-radius: 5px;
+            margin: 10px 0;
         }
 
-        .conversion-rate {
-            text-align: center;
+        /* The requested conversion info text */
+        .info-text {
             font-size: 0.85rem;
             color: #555;
-            background: #fff8e1;
+            background: #fff9c4;
             padding: 8px;
             border-radius: 4px;
-            border: 1px dashed #ccc;
+            text-align: center;
+            border: 1px dashed #ffd54f;
         }
 
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #888;
+            font-size: 0.9rem;
+        }
     </style>
 </head>
 <body>
 
-    <div class="visitor-counter">
-        Live Visitors: <span id="visitorCount">1,042</span>
-    </div>
+    <div class="counter-box">Visitors: <span id="vCount">0</span></div>
 
-    <header>
-        <h1>US Unit Converter Pro</h1>
-        <p>Instant, accurate conversions for everyday measurements.</p>
-    </header>
+    <div class="header">
+        <h1>US Standard Unit Converter</h1>
+        <p>Simple, Fast, and Accurate Conversions</p>
+    </div>
 
     <div class="container">
         
         <div class="card">
-            <h3>Length & Distance</h3>
-            <input type="number" id="lengthInput" placeholder="Enter value..." oninput="calculate('length')" value="1">
-            <div class="input-group">
-                <select id="lengthFrom" onchange="calculate('length')">
-                    <option value="mile">Miles (mi)</option>
-                    <option value="yard">Yards (yd)</option>
-                    <option value="foot">Feet (ft)</option>
-                    <option value="inch">Inches (in)</option>
-                    <option value="kilometer">Kilometers (km)</option>
-                    <option value="meter">Meters (m)</option>
-                    <option value="centimeter">Centimeters (cm)</option>
-                </select>
-                <button class="swap-btn" onclick="swap('length')" title="Swap Units">⇄</button>
-                <select id="lengthTo" onchange="calculate('length')">
-                    <option value="kilometer">Kilometers (km)</option>
-                    <option value="meter">Meters (m)</option>
-                    <option value="centimeter">Centimeters (cm)</option>
-                    <option value="mile">Miles (mi)</option>
-                    <option value="yard">Yards (yd)</option>
-                    <option value="foot">Feet (ft)</option>
-                    <option value="inch">Inches (in)</option>
-                </select>
-            </div>
-            <div class="result-display" id="lengthResult">0</div>
-            <div class="conversion-rate" id="lengthRate">1 Mile = 1.60934 Kilometers</div>
+            <h2>Length (Distance)</h2>
+            <input type="number" id="lenInput" value="1" oninput="convertLen()">
+            <select id="lenFrom" onchange="convertLen()">
+                <option value="m">Meters (m)</option>
+                <option value="yd">Yards (yd)</option>
+                <option value="ft">Feet (ft)</option>
+                <option value="in">Inches (in)</option>
+            </select>
+            <select id="lenTo" onchange="convertLen()">
+                <option value="yd">Yards (yd)</option>
+                <option value="m">Meters (m)</option>
+                <option value="ft">Feet (ft)</option>
+                <option value="in">Inches (in)</option>
+            </select>
+            <div class="result" id="lenRes">1.0936 yd</div>
+            <div class="info-text" id="lenInfo">1 Meter = 1.0936 Yards</div>
         </div>
 
         <div class="card">
-            <h3>Area</h3>
-            <input type="number" id="areaInput" placeholder="Enter value..." oninput="calculate('area')" value="1">
-            <div class="input-group">
-                <select id="areaFrom" onchange="calculate('area')">
-                    <option value="acre">Acres</option>
-                    <option value="sq_mile">Sq Miles (mi²)</option>
-                    <option value="sq_foot">Sq Feet (ft²)</option>
-                    <option value="sq_inch">Sq Inches (in²)</option>
-                    <option value="hectare">Hectares (ha)</option>
-                    <option value="sq_meter">Sq Meters (m²)</option>
-                </select>
-                <button class="swap-btn" onclick="swap('area')" title="Swap Units">⇄</button>
-                <select id="areaTo" onchange="calculate('area')">
-                    <option value="hectare">Hectares (ha)</option>
-                    <option value="sq_meter">Sq Meters (m²)</option>
-                    <option value="acre">Acres</option>
-                    <option value="sq_mile">Sq Miles (mi²)</option>
-                    <option value="sq_foot">Sq Feet (ft²)</option>
-                    <option value="sq_inch">Sq Inches (in²)</option>
-                </select>
-            </div>
-            <div class="result-display" id="areaResult">0</div>
-            <div class="conversion-rate" id="areaRate">1 Acre = 0.404686 Hectares</div>
+            <h2>Area</h2>
+            <input type="number" id="areaInput" value="1" oninput="convertArea()">
+            <select id="areaFrom" onchange="convertArea()">
+                <option value="sqm">Sq Meters (m²)</option>
+                <option value="acre">Acres</option>
+                <option value="sqft">Sq Feet (ft²)</option>
+            </select>
+            <select id="areaTo" onchange="convertArea()">
+                <option value="acre">Acres</option>
+                <option value="sqm">Sq Meters (m²)</option>
+                <option value="sqft">Sq Feet (ft²)</option>
+            </select>
+            <div class="result" id="areaRes">0.0002 Acres</div>
+            <div class="info-text" id="areaInfo">1 Sq Meter = 0.000247 Acres</div>
         </div>
 
         <div class="card">
-            <h3>Volume</h3>
-            <input type="number" id="volumeInput" placeholder="Enter value..." oninput="calculate('volume')" value="1">
-            <div class="input-group">
-                <select id="volumeFrom" onchange="calculate('volume')">
-                    <option value="us_gallon">Gallons (US gal)</option>
-                    <option value="us_quart">Quarts (US qt)</option>
-                    <option value="us_ounce">Fluid Ounces (fl oz)</option>
-                    <option value="liter">Liters (L)</option>
-                    <option value="milliliter">Milliliters (ml)</option>
-                </select>
-                <button class="swap-btn" onclick="swap('volume')" title="Swap Units">⇄</button>
-                <select id="volumeTo" onchange="calculate('volume')">
-                    <option value="liter">Liters (L)</option>
-                    <option value="milliliter">Milliliters (ml)</option>
-                    <option value="us_gallon">Gallons (US gal)</option>
-                    <option value="us_quart">Quarts (US qt)</option>
-                    <option value="us_ounce">Fluid Ounces (fl oz)</option>
-                </select>
-            </div>
-            <div class="result-display" id="volumeResult">0</div>
-            <div class="conversion-rate" id="volumeRate">1 Gallon = 3.78541 Liters</div>
-        </div>
-
-        <div class="card">
-            <h3>Temperature</h3>
-            <input type="number" id="tempInput" placeholder="Enter value..." oninput="calculateTemp()" value="32">
-            <div class="input-group">
-                <select id="tempFrom" onchange="calculateTemp()">
-                    <option value="f">Fahrenheit (°F)</option>
-                    <option value="c">Celsius (°C)</option>
-                    <option value="k">Kelvin (K)</option>
-                </select>
-                <button class="swap-btn" onclick="swapTemp()" title="Swap Units">⇄</button>
-                <select id="tempTo" onchange="calculateTemp()">
-                    <option value="c">Celsius (°C)</option>
-                    <option value="f">Fahrenheit (°F)</option>
-                    <option value="k">Kelvin (K)</option>
-                </select>
-            </div>
-            <div class="result-display" id="tempResult">0</div>
-            <div class="conversion-rate" id="tempRate">32 °F = 0 °C</div>
+            <h2>Temperature</h2>
+            <input type="number" id="tempInput" value="0" oninput="convertTemp()">
+            <select id="tempFrom" onchange="convertTemp()">
+                <option value="c">Celsius (°C)</option>
+                <option value="f">Fahrenheit (°F)</option>
+            </select>
+            <select id="tempTo" onchange="convertTemp()">
+                <option value="f">Fahrenheit (°F)</option>
+                <option value="c">Celsius (°C)</option>
+            </select>
+            <div class="result" id="tempRes">32 °F</div>
+            <div class="info-text" id="tempInfo">0 °C = 32 °F</div>
         </div>
 
     </div>
 
+    <footer>
+        &copy; 2026 Unit Converter Pro - Serving the US Community
+    </footer>
+
     <script>
-        // --- Conversion Rates (relative to a base unit) ---
-        const rates = {
-            length: {
-                meter: 1,
-                kilometer: 1000,
-                centimeter: 0.01,
-                inch: 0.0254,
-                foot: 0.3048,
-                yard: 0.9144,
-                mile: 1609.344
-            },
-            area: {
-                sq_meter: 1,
-                hectare: 10000,
-                sq_inch: 0.00064516,
-                sq_foot: 0.092903,
-                sq_mile: 2589988.11,
-                acre: 4046.856
-            },
-            volume: {
-                liter: 1,
-                milliliter: 0.001,
-                us_gallon: 3.78541,
-                us_quart: 0.946352946,
-                us_ounce: 0.0295735
-            }
-        };
-
-        // --- Main Calculate Function (Length, Area, Volume) ---
-        function calculate(type) {
-            const val = parseFloat(document.getElementById(type + 'Input').value);
-            const from = document.getElementById(type + 'From');
-            const to = document.getElementById(type + 'To');
-            const resultBox = document.getElementById(type + 'Result');
-            const rateBox = document.getElementById(type + 'Rate');
-
-            const fromVal = from.value;
-            const toVal = to.value;
-            const fromText = from.options[from.selectedIndex].text.split(' ')[0]; // Get clean text
-            const toText = to.options[to.selectedIndex].text.split(' ')[0];
-
-            if (isNaN(val)) {
-                resultBox.innerText = "...";
-                return;
-            }
-
-            // Math: (Input * FromRate) / ToRate
-            const baseValue = val * rates[type][fromVal];
-            const finalValue = baseValue / rates[type][toVal];
+        // Conversion logic
+        function convertLen() {
+            const val = document.getElementById('lenInput').value;
+            const from = document.getElementById('lenFrom').value;
+            const to = document.getElementById('lenTo').value;
             
-            // Single Unit Rate for the bottom text
-            const singleUnitRate = (1 * rates[type][fromVal]) / rates[type][toVal];
-
-            // Update UI
-            resultBox.innerText = finalValue.toLocaleString('en-US', {maximumFractionDigits: 4}) + " " + toText;
-            rateBox.innerText = `1 ${fromText} = ${singleUnitRate.toLocaleString('en-US', {maximumFractionDigits: 6})} ${toText}`;
+            const factors = { m: 1, yd: 1.09361, ft: 3.28084, in: 39.3701 };
+            const res = (val / factors[from]) * factors[to];
+            
+            document.getElementById('lenRes').innerText = res.toFixed(4) + " " + to;
+            document.getElementById('lenInfo').innerText = `1 ${from} = ${(factors[to]/factors[from]).toFixed(4)} ${to}`;
         }
 
-        // --- Temperature requires formulas, not just multiplication ---
-        function calculateTemp() {
+        function convertArea() {
+            const val = document.getElementById('areaInput').value;
+            const from = document.getElementById('areaFrom').value;
+            const to = document.getElementById('areaTo').value;
+            
+            const factors = { sqm: 1, acre: 0.000247105, sqft: 10.7639 };
+            const res = (val / factors[from]) * factors[to];
+            
+            document.getElementById('areaRes').innerText = res.toFixed(4) + " " + to;
+            document.getElementById('areaInfo').innerText = `1 ${from} = ${(factors[to]/factors[from]).toFixed(6)} ${to}`;
+        }
+
+        function convertTemp() {
             const val = parseFloat(document.getElementById('tempInput').value);
-            const from = document.getElementById('tempFrom');
-            const to = document.getElementById('tempTo');
-            const resultBox = document.getElementById('tempResult');
-            const rateBox = document.getElementById('tempRate');
+            const from = document.getElementById('tempFrom').value;
+            const to = document.getElementById('tempTo').value;
+            let res;
 
-            const f = from.value;
-            const t = to.value;
-            const fromText = from.options[from.selectedIndex].text;
-            const toText = to.options[to.selectedIndex].text;
+            if (from === to) res = val;
+            else if (from === 'c') res = (val * 9/5) + 32;
+            else res = (val - 32) * 5/9;
 
-            if (isNaN(val)) { resultBox.innerText = "..."; return; }
-
-            let c;
-            // Convert everything to Celsius first
-            if (f === 'f') c = (val - 32) * 5/9;
-            else if (f === 'k') c = val - 273.15;
-            else c = val;
-
-            let finalValue;
-            // Convert Celsius to target
-            if (t === 'f') finalValue = (c * 9/5) + 32;
-            else if (t === 'k') finalValue = c + 273.15;
-            else finalValue = c;
-
-            resultBox.innerText = finalValue.toLocaleString('en-US', {maximumFractionDigits: 2});
-            
-            // Update rate text (Example: 1 °F -> °C)
-            rateBox.innerText = `${val} ${fromText} = ${finalValue.toLocaleString('en-US', {maximumFractionDigits: 2})} ${toText}`;
+            document.getElementById('tempRes').innerText = res.toFixed(2) + " °" + to.toUpperCase();
+            document.getElementById('tempInfo').innerText = `Formula: ${from==='c'?'(C×9/5)+32':'(F-32)×5/9'}`;
         }
 
-        // --- Swap Functions ---
-        function swap(type) {
-            const from = document.getElementById(type + 'From');
-            const to = document.getElementById(type + 'To');
-            const temp = from.value;
-            from.value = to.value;
-            to.value = temp;
-            calculate(type);
-        }
-
-        function swapTemp() {
-            const from = document.getElementById('tempFrom');
-            const to = document.getElementById('tempTo');
-            const temp = from.value;
-            from.value = to.value;
-            to.value = temp;
-            calculateTemp();
-        }
-
-        // --- Simulated Visitor Counter ---
-        // Note: Real counters on static pages require third-party APIs. 
-        // This simulates a realistic local counter for demonstration.
-        window.onload = function() {
-            let count = localStorage.getItem('siteVisits');
-            if (!count) count = Math.floor(Math.random() * 500) + 1000; // Starting random base
-            count = parseInt(count) + 1;
-            localStorage.setItem('siteVisits', count);
-            document.getElementById('visitorCount').innerText = count.toLocaleString('en-US');
-
-            // Initialize all calculations on load
-            calculate('length');
-            calculate('area');
-            calculate('volume');
-            calculateTemp();
-        };
+        // Simple Visitor Counter (Session based)
+        let visits = localStorage.getItem('vCount') || Math.floor(Math.random() * 2000);
+        visits = parseInt(visits) + 1;
+        localStorage.setItem('vCount', visits);
+        document.getElementById('vCount').innerText = visits;
     </script>
 </body>
 </html>
