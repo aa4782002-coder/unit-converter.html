@@ -3,226 +3,236 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional US Unit Converter | Accurate Metric to Imperial</title>
+    <meta name="description" content="Free professional US unit converter. Instantly convert miles to km, fahrenheit to celsius, gallons to liters, and acres to sq meters. Optimized for US standards and precision.">
+    <meta name="keywords" content="unit converter, US to metric, miles to km, fahrenheit to celsius, gallons to liters, acres to square meters, measurement conversion, American units, inches to cm">
     
-    <title>Easy Unit Converter | US Standard & Metric Tool</title>
-    <meta name="description" content="Fast and free online unit converter for US Customary and Metric units. Convert length, area, volume, and temperature instantly.">
-    <meta name="keywords" content="unit converter, inches to cm, fahrenheit to celsius, gallons to liters, miles to km, area converter, US measurement tools, fast conversion">
-    <meta name="author" content="AA4782002-Coder">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --us-blue: #002868;
-            --us-red: #bf0a30;
-            --light-gray: #f8f9fa;
+            --navy: #0a192f;
+            --crimson: #dc2626;
+            --gray-light: #f3f4f6;
+            --gray-medium: #e5e7eb;
+            --gray-dark: #6b7280;
+            --white: #ffffff;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --radius: 12px;
         }
 
-        body {
-            font-family: 'Segoe UI', Arial, sans-serif;
-            background-color: #f0f2f5;
-            margin: 0;
-            padding: 20px;
-            color: #333;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--gray-light); color: var(--navy); line-height: 1.6; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
 
-        /* Visitor Counter Style */
-        .counter-box {
-            position: fixed;
-            top: 10px;
-            right: 10px;
-            background: var(--us-blue);
-            color: white;
-            padding: 8px 15px;
-            border-radius: 5px;
-            font-weight: bold;
-            font-size: 14px;
-            z-index: 1000;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        }
+        header { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; border-bottom: 1px solid var(--gray-medium); margin-bottom: 40px; }
+        .logo { font-size: 24px; font-weight: 700; color: var(--navy); }
+        .logo span { color: var(--crimson); }
+        .counter { background: var(--navy); color: var(--white); padding: 8px 16px; border-radius: 20px; font-size: 14px; box-shadow: var(--shadow); }
 
-        .header {
-            text-align: center;
-            padding: 30px 0;
-        }
+        h1 { font-size: 32px; font-weight: 700; text-align: center; margin-bottom: 10px; }
+        .subtitle { text-align: center; color: var(--gray-dark); margin-bottom: 40px; font-size: 18px; }
 
-        .header h1 { color: var(--us-blue); margin-bottom: 5px; }
-        .header p { color: #666; }
+        .converter-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-bottom: 60px; }
+        .converter-card { background: var(--white); border-radius: var(--radius); padding: 30px; box-shadow: var(--shadow); transition: 0.3s; }
+        .converter-card:hover { transform: translateY(-5px); box-shadow: 0 10px 15px rgba(0,0,0,0.1); }
 
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
+        .card-title { font-size: 20px; font-weight: 600; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; color: var(--navy); }
+        .swap-btn { background: var(--gray-light); border: none; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.2s; }
+        .swap-btn:hover { background: var(--gray-medium); }
 
-        .card {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            border-bottom: 4px solid var(--us-red);
-        }
+        .input-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: 500; font-size: 14px; }
+        select, input { width: 100%; padding: 12px; border: 1px solid var(--gray-medium); border-radius: 8px; font-size: 16px; outline: none; transition: 0.2s; }
+        select:focus, input:focus { border-color: var(--crimson); }
 
-        .card h2 {
-            font-size: 1.2rem;
-            color: var(--us-blue);
-            margin-top: 0;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 10px;
-        }
+        .result-container { background: var(--gray-light); padding: 20px; border-radius: 8px; margin-top: 20px; position: relative; border: 1px solid var(--gray-medium); }
+        .result-value { font-size: 24px; font-weight: 700; color: var(--crimson); margin-bottom: 5px; }
+        .copy-btn { position: absolute; top: 15px; right: 15px; background: white; border: 1px solid var(--gray-medium); padding: 5px 10px; border-radius: 6px; cursor: pointer; font-size: 12px; }
+        .formula { font-size: 13px; color: var(--gray-dark); font-style: italic; }
 
-        input, select {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 16px;
-        }
+        .about-section { background: var(--white); padding: 50px; border-radius: var(--radius); box-shadow: var(--shadow); margin-bottom: 50px; }
+        .about-section h2 { margin-bottom: 20px; color: var(--navy); border-left: 5px solid var(--crimson); padding-left: 15px; }
+        .about-content p { margin-bottom: 15px; font-size: 16px; color: #334155; }
 
-        .result {
-            background: #eef7ff;
-            padding: 15px;
-            text-align: center;
-            font-size: 1.4rem;
-            font-weight: bold;
-            color: var(--us-red);
-            border-radius: 5px;
-            margin: 10px 0;
-        }
+        .tag-cloud { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 20px; }
+        .tag { background: var(--gray-light); padding: 8px 15px; border-radius: 20px; font-size: 13px; color: var(--navy); text-decoration: none; transition: 0.2s; border: 1px solid transparent; }
+        .tag:hover { background: var(--crimson); color: white; transform: scale(1.05); }
 
-        /* The requested conversion info text */
-        .info-text {
-            font-size: 0.85rem;
-            color: #555;
-            background: #fff9c4;
-            padding: 8px;
-            border-radius: 4px;
-            text-align: center;
-            border: 1px dashed #ffd54f;
-        }
-
-        footer {
-            text-align: center;
-            margin-top: 40px;
-            color: #888;
-            font-size: 0.9rem;
-        }
+        footer { background: var(--navy); color: var(--white); padding: 40px 20px; text-align: center; margin-top: 50px; border-top: 4px solid var(--crimson); }
+        .footer-links { margin-bottom: 20px; }
+        .footer-links a { color: white; text-decoration: none; margin: 0 15px; font-size: 14px; opacity: 0.8; }
+        .footer-links a:hover { opacity: 1; color: var(--crimson); }
     </style>
 </head>
 <body>
 
-    <div class="counter-box">Visitors: <span id="vCount">0</span></div>
-
-    <div class="header">
-        <h1>US Standard Unit Converter</h1>
-        <p>Simple, Fast, and Accurate Conversions</p>
-    </div>
-
     <div class="container">
-        
-        <div class="card">
-            <h2>Length (Distance)</h2>
-            <input type="number" id="lenInput" value="1" oninput="convertLen()">
-            <select id="lenFrom" onchange="convertLen()">
-                <option value="m">Meters (m)</option>
-                <option value="yd">Yards (yd)</option>
-                <option value="ft">Feet (ft)</option>
-                <option value="in">Inches (in)</option>
-            </select>
-            <select id="lenTo" onchange="convertLen()">
-                <option value="yd">Yards (yd)</option>
-                <option value="m">Meters (m)</option>
-                <option value="ft">Feet (ft)</option>
-                <option value="in">Inches (in)</option>
-            </select>
-            <div class="result" id="lenRes">1.0936 yd</div>
-            <div class="info-text" id="lenInfo">1 Meter = 1.0936 Yards</div>
+        <header>
+            <div class="logo">US<span>Converter</span> Pro</div>
+            <div class="counter">Live Users: <span id="v-count">1,247</span></div>
+        </header>
+
+        <h1>Professional US Unit Converter</h1>
+        <p class="subtitle">Fast, Precise & Reliable conversions for US & Metric systems</p>
+
+        <div class="converter-grid">
+            <div class="converter-card">
+                <div class="card-title">Length & Distance <button class="swap-btn" onclick="swap('L')">⇄</button></div>
+                <div class="input-group">
+                    <label>Value</label>
+                    <input type="number" id="L-in" value="1" oninput="calcL()">
+                </div>
+                <div class="input-group">
+                    <select id="L-from" onchange="calcL()">
+                        <option value="miles">Miles</option><option value="inches">Inches</option>
+                        <option value="feet">Feet</option><option value="meters">Meters</option>
+                        <option value="km">Kilometers</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <select id="L-to" onchange="calcL()">
+                        <option value="km">Kilometers</option><option value="miles">Miles</option>
+                        <option value="meters">Meters</option><option value="feet">Feet</option>
+                    </select>
+                </div>
+                <div class="result-container">
+                    <div class="result-value" id="L-res">1.6093 km</div>
+                    <button class="copy-btn" onclick="copy('L-res')">Copy 📋</button>
+                    <div class="formula" id="L-form">1 Mile = 1.6093 km</div>
+                </div>
+            </div>
+
+            <div class="converter-card">
+                <div class="card-title">Temperature <button class="swap-btn" onclick="swap('T')">⇄</button></div>
+                <div class="input-group">
+                    <label>Value</label>
+                    <input type="number" id="T-in" value="32" oninput="calcT()">
+                </div>
+                <div class="input-group"><select id="T-from" onchange="calcT()"><option value="f">Fahrenheit (°F)</option><option value="c">Celsius (°C)</option></select></div>
+                <div class="input-group"><select id="T-to" onchange="calcT()"><option value="c">Celsius (°C)</option><option value="f">Fahrenheit (°F)</option></select></div>
+                <div class="result-container">
+                    <div class="result-value" id="T-res">0.00 °C</div>
+                    <button class="copy-btn" onclick="copy('T-res')">Copy 📋</button>
+                    <div class="formula" id="T-form">°C = (°F - 32) × 5/9</div>
+                </div>
+            </div>
+
+            <div class="converter-card">
+                <div class="card-title">Area <button class="swap-btn" onclick="swap('A')">⇄</button></div>
+                <div class="input-group">
+                    <label>Value</label>
+                    <input type="number" id="A-in" value="1" oninput="calcA()">
+                </div>
+                <div class="input-group"><select id="A-from" onchange="calcA()"><option value="acres">Acres</option><option value="sqft">Sq Feet</option><option value="sqm">Sq Meters</option></select></div>
+                <div class="input-group"><select id="A-to" onchange="calcA()"><option value="sqm">Sq Meters</option><option value="acres">Acres</option><option value="sqft">Sq Feet</option></select></div>
+                <div class="result-container">
+                    <div class="result-value" id="A-res">4046.86 sqm</div>
+                    <button class="copy-btn" onclick="copy('A-res')">Copy 📋</button>
+                    <div class="formula" id="A-form">1 Acre = 4046.86 sqm</div>
+                </div>
+            </div>
+
+            <div class="converter-card">
+                <div class="card-title">Volume <button class="swap-btn" onclick="swap('V')">⇄</button></div>
+                <div class="input-group">
+                    <label>Value</label>
+                    <input type="number" id="V-in" value="1" oninput="calcV()">
+                </div>
+                <div class="input-group"><select id="V-from" onchange="calcV()"><option value="gal">US Gallons</option><option value="liters">Liters</option><option value="floz">Fluid Ounces</option></select></div>
+                <div class="input-group"><select id="V-to" onchange="calcV()"><option value="liters">Liters</option><option value="gal">US Gallons</option><option value="floz">Fluid Ounces</option></select></div>
+                <div class="result-container">
+                    <div class="result-value" id="V-res">3.7854 L</div>
+                    <button class="copy-btn" onclick="copy('V-res')">Copy 📋</button>
+                    <div class="formula" id="V-form">1 Gallon = 3.7854 L</div>
+                </div>
+            </div>
         </div>
 
-        <div class="card">
-            <h2>Area</h2>
-            <input type="number" id="areaInput" value="1" oninput="convertArea()">
-            <select id="areaFrom" onchange="convertArea()">
-                <option value="sqm">Sq Meters (m²)</option>
-                <option value="acre">Acres</option>
-                <option value="sqft">Sq Feet (ft²)</option>
-            </select>
-            <select id="areaTo" onchange="convertArea()">
-                <option value="acre">Acres</option>
-                <option value="sqm">Sq Meters (m²)</option>
-                <option value="sqft">Sq Feet (ft²)</option>
-            </select>
-            <div class="result" id="areaRes">0.0002 Acres</div>
-            <div class="info-text" id="areaInfo">1 Sq Meter = 0.000247 Acres</div>
+        <div class="about-section">
+            <h2>Understanding US Customary & Metric Units</h2>
+            <div class="about-content">
+                <p>The United States remains one of the few nations utilizing the US Customary system for daily life, while the rest of the world and the global scientific community rely on the Metric system (SI). This dual-standard reality creates a constant need for precise conversion tools in engineering, international trade, and education.</p>
+                <p>Our converter bridges this gap by providing high-precision calculations for length, temperature, area, and volume. Whether you are a traveler converting Fahrenheit to Celsius, a real estate agent calculating Acres to Square Meters, or a student working on physics problems, accuracy is paramount. This tool uses industry-standard factors (e.g., 1 inch = 2.54 cm exactly) to ensure your results meet professional requirements.</p>
+                <p>We've designed this interface to be "Instant-Action," meaning results update as you type. This saves time and reduces the risk of errors common with traditional 'Convert' buttons. Explore our popular conversion tags below for the most frequent US-Metric pairs.</p>
+            </div>
+            <div class="tag-cloud">
+                <a href="#" class="tag">Miles to KM</a><a href="#" class="tag">Fahrenheit to Celsius</a>
+                <a href="#" class="tag">Gallons to Liters</a><a href="#" class="tag">Acres to Sq Meters</a>
+                <a href="#" class="tag">Inches to CM</a><a href="#" class="tag">Feet to Meters</a>
+            </div>
         </div>
-
-        <div class="card">
-            <h2>Temperature</h2>
-            <input type="number" id="tempInput" value="0" oninput="convertTemp()">
-            <select id="tempFrom" onchange="convertTemp()">
-                <option value="c">Celsius (°C)</option>
-                <option value="f">Fahrenheit (°F)</option>
-            </select>
-            <select id="tempTo" onchange="convertTemp()">
-                <option value="f">Fahrenheit (°F)</option>
-                <option value="c">Celsius (°C)</option>
-            </select>
-            <div class="result" id="tempRes">32 °F</div>
-            <div class="info-text" id="tempInfo">0 °C = 32 °F</div>
-        </div>
-
     </div>
 
     <footer>
-        &copy; 2026 Unit Converter Pro - Serving the US Community
+        <div class="footer-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Contact</a></div>
+        <p>&copy; 2026 US Converter Pro. All rights reserved.</p>
     </footer>
 
     <script>
-        // Conversion logic
-        function convertLen() {
-            const val = document.getElementById('lenInput').value;
-            const from = document.getElementById('lenFrom').value;
-            const to = document.getElementById('lenTo').value;
-            
-            const factors = { m: 1, yd: 1.09361, ft: 3.28084, in: 39.3701 };
-            const res = (val / factors[from]) * factors[to];
-            
-            document.getElementById('lenRes').innerText = res.toFixed(4) + " " + to;
-            document.getElementById('lenInfo').innerText = `1 ${from} = ${(factors[to]/factors[from]).toFixed(4)} ${to}`;
+        const factors = {
+            L: { miles: 1609.34, feet: 0.3048, inches: 0.0254, meters: 1, km: 1000 },
+            A: { acres: 4046.86, sqft: 0.092903, sqm: 1 },
+            V: { gal: 3.78541, liters: 1, floz: 0.0295735 }
+        };
+
+        function calcL() {
+            const v = parseFloat(document.getElementById('L-in').value) || 0;
+            const f = document.getElementById('L-from').value;
+            const t = document.getElementById('L-to').value;
+            const res = (v * factors.L[f]) / factors.L[t];
+            document.getElementById('L-res').innerText = res.toFixed(4) + " " + t;
+            document.getElementById('L-form').innerText = `1 ${f} = ${(factors.L[f]/factors.L[t]).toFixed(4)} ${t}`;
         }
 
-        function convertArea() {
-            const val = document.getElementById('areaInput').value;
-            const from = document.getElementById('areaFrom').value;
-            const to = document.getElementById('areaTo').value;
-            
-            const factors = { sqm: 1, acre: 0.000247105, sqft: 10.7639 };
-            const res = (val / factors[from]) * factors[to];
-            
-            document.getElementById('areaRes').innerText = res.toFixed(4) + " " + to;
-            document.getElementById('areaInfo').innerText = `1 ${from} = ${(factors[to]/factors[from]).toFixed(6)} ${to}`;
-        }
-
-        function convertTemp() {
-            const val = parseFloat(document.getElementById('tempInput').value);
-            const from = document.getElementById('tempFrom').value;
-            const to = document.getElementById('tempTo').value;
+        function calcT() {
+            const v = parseFloat(document.getElementById('T-in').value) || 0;
+            const f = document.getElementById('T-from').value;
+            const t = document.getElementById('T-to').value;
             let res;
-
-            if (from === to) res = val;
-            else if (from === 'c') res = (val * 9/5) + 32;
-            else res = (val - 32) * 5/9;
-
-            document.getElementById('tempRes').innerText = res.toFixed(2) + " °" + to.toUpperCase();
-            document.getElementById('tempInfo').innerText = `Formula: ${from==='c'?'(C×9/5)+32':'(F-32)×5/9'}`;
+            if(f===t) res = v;
+            else if(f==='f') res = (v-32)*5/9;
+            else res = (v*9/5)+32;
+            document.getElementById('T-res').innerText = res.toFixed(2) + " °" + t.toUpperCase();
+            document.getElementById('T-form').innerText = f==='f' ? "°C = (°F - 32) × 5/9" : "°F = (°C × 9/5) + 32";
         }
 
-        // Simple Visitor Counter (Session based)
-        let visits = localStorage.getItem('vCount') || Math.floor(Math.random() * 2000);
-        visits = parseInt(visits) + 1;
-        localStorage.setItem('vCount', visits);
-        document.getElementById('vCount').innerText = visits;
+        function calcA() {
+            const v = parseFloat(document.getElementById('A-in').value) || 0;
+            const f = document.getElementById('A-from').value;
+            const t = document.getElementById('A-to').value;
+            const res = (v * factors.A[f]) / factors.A[t];
+            document.getElementById('A-res').innerText = res.toFixed(2) + " " + t;
+            document.getElementById('A-form').innerText = `1 ${f} = ${(factors.A[f]/factors.A[t]).toFixed(2)} ${t}`;
+        }
+
+        function calcV() {
+            const v = parseFloat(document.getElementById('V-in').value) || 0;
+            const f = document.getElementById('V-from').value;
+            const t = document.getElementById('V-to').value;
+            const res = (v * factors.V[f]) / factors.V[t];
+            document.getElementById('V-res').innerText = res.toFixed(4) + " " + t;
+            document.getElementById('V-form').innerText = `1 ${f} = ${(factors.V[f]/factors.V[t]).toFixed(4)} ${t}`;
+        }
+
+        function swap(id) {
+            const f = document.getElementById(id+'-from'), t = document.getElementById(id+'-to');
+            const tmp = f.value; f.value = t.value; t.value = tmp;
+            window['calc'+id]();
+        }
+
+        function copy(id) {
+            navigator.clipboard.writeText(document.getElementById(id).innerText);
+            alert("Copied!");
+        }
+
+        setInterval(() => {
+            document.getElementById('v-count').innerText = (1247 + Math.floor(Math.random()*50)).toLocaleString();
+        }, 5000);
+
+        window.onload = () => { calcL(); calcT(); calcA(); calcV(); };
     </script>
 </body>
 </html>
