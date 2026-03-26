@@ -64,6 +64,12 @@
         footer { background: var(--navy); color: var(--white); padding: 40px 20px; text-align: center; margin-top: 50px; border-top: 4px solid var(--crimson); }
         .footer-links { margin-bottom: 20px; }
         .footer-links a { color: white; text-decoration: none; margin: 0 15px; font-size: 14px; opacity: 0.8; }
+    /* Privacy Modal Style */
+.modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); }
+.modal-content { background: white; margin: 10% auto; padding: 30px; border-radius: 12px; width: 80%; max-width: 700px; max-height: 70vh; overflow-y: auto; position: relative; color: #0a192f; text-align: left; }
+.close-modal { position: absolute; right: 20px; top: 15px; font-size: 24px; cursor: pointer; color: #0a192f; }
+.privacy-link { color: white; text-decoration: underline; cursor: pointer; font-size: 14px; opacity: 0.8; margin-left: 15px; }
+.privacy-link:hover { opacity: 1; color: #dc2626; }
         .footer-links a:hover { opacity: 1; color: var(--crimson); }
     </style>
 </head>
@@ -167,7 +173,11 @@
     </div>
 
     <footer>
-        <div class="footer-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Contact</a></div>
+ <div class="footer-links">
+    <a href="javascript:void(0)" class="privacy-link" onclick="openPrivacy()">Privacy Policy</a>
+    <a href="#">Terms</a>
+    <a href="#">Contact</a>
+</div>
         <p>&copy; 2026 US Converter Pro. All rights reserved.</p>
     </footer>
 
