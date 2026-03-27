@@ -233,27 +233,5 @@
         }, 5000);
 
         window.onload = () => { calcL(); calcT(); calcA(); calcV(); };
-<div id="privacyModal" class="modal">
-    <div class="modal-content">
-        <span class="close-modal" onclick="closePrivacy()">&times;</span>
-        <h2 style="margin-bottom:20px;">Privacy Policy</h2>
-        <p>At <strong>Pro-Units</strong>, we prioritize your privacy. This website does not collect personal data from visitors. We use standard web technologies to provide unit conversion services.</p>
-        <h3 style="margin-top:20px;">Ads & Cookies</h3>
-        <p>We may use third-party advertising companies (like Monetag) to serve ads when you visit our website. These companies may use information about your visits to this and other websites in order to provide advertisements about goods and services of interest to you.</p>
-        <h3 style="margin-top:20px;">Accuracy</h3>
-        <p>While we strive for 100% accuracy, our conversion tools are provided "as is" for informational purposes. Users should verify critical measurements independently.</p>
-        <p style="margin-top:20px; font-size:12px; color:gray;">Last Updated: March 2026</p>
-    </div>
-</div>
-
-<script>
-function openPrivacy() { document.getElementById('privacyModal').style.display = 'block'; }
-function closePrivacy() { document.getElementById('privacyModal').style.display = 'none'; }
-// Close modal when clicking outside
-window.onclick = function(event) {
-    let modal = document.getElementById('privacyModal');
-    if (event.target == modal) modal.style.display = 'none';
-}
-</script>
 </body>
 </html>
